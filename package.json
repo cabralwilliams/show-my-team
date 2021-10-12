@@ -1,0 +1,25 @@
+{
+  "name": "show-my-team",
+  "version": "1.0.0",
+  "description": "An application that takes user input about her or his team and then will display a styled html page based on the information provided.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cabralwilliams/show-my-team.git"
+  },
+  "author": "Cabral Williams",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cabralwilliams/show-my-team/issues"
+  },
+  "homepage": "https://github.com/cabralwilliams/show-my-team#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  },
+  "devDependencies": {
+    "jest": "^27.2.5"
+  }
+}
