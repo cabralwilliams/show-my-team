@@ -17,7 +17,10 @@ const hEl = (hContent, hNumber = 2, hClasses = []) => {
     return output;
 };
 
-const aEl = (aContent, aHref) => {
+const aEl = (aContent, aHref, isUrl = false) => {
+    if(isUrl) {
+        return `<a href='${aHref}' target='_blank'>${aContent}</a>`;
+    }
     return `<a href='${aHref}'>${aContent}</a>`;
 };
 
@@ -25,7 +28,7 @@ const employeeCard = employeeData => {
     const nameClasses = [];
     const titleClasses = [];
     const defaultClasses = [];
-    const cardClasses = [];
+    const cardClasses = ["card"];
 
     const nameEl = hEl(employeeData.getName(),2,nameClasses);
     const titleEl = hEl(employeeData.getRole(),3,titleClasses);
@@ -36,12 +39,12 @@ const employeeCard = employeeData => {
     if(employeeData.getRole() === "Manager") {
         div3 = divEl(`Office number: ${employeeData.officeNumber}`,defaultClasses);
     } else if(employeeData.getRole() === "Engineer") {
-        let githubA = aEl(employeeData.github,employeeData.getGithub());
+        let githubA = aEl(employeeData.github,employeeData.getGithub(),true);
         div3 = divEl(`GitHub: ${githubA}`,defaultClasses);
     } else {
         div3 = divEl(`School: ${employeeData.getSchool()}`);
     }
-    return divEl(`${nameEl}${titleEl}${idEl}${emailEl}${div3}`,cardClasses);
+    return divEl(`\n\t\t\t${nameEl}\n\t\t\t${titleEl}\n\t\t\t${idEl}\n\t\t\t${emailEl}\n\t\t\t${div3}`,cardClasses);
 };
 
 module.exports = { employeeCard, hEl };

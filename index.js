@@ -67,13 +67,13 @@ function getEmployees(employees) {
                 employees.push(nextEmployee);
                 if(!employeeData.addEmployee) {
                     console.log(employees);
-                    let html = "<html><head><title>My Team</title>"; //More will be added later
-
-                    html += `</head><body>${hEl("My Team",1,[])}`;
+                    let html = "<html>\n\t<head>"; //More will be added later
+                    html +=`\n\t\t<meta charset="UTF-8">\n\t\t<meta http-equiv="X-UA-Compatible" content="IE=edge">\n\t\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n\t\t<title>${employees[0].getName()}'s Team</title>\n\t\t<link href="./style.css" rel="stylesheet" />`
+                    html += `\n\t</head>\n\t<body>\n\t\t${hEl("My Team",1,[])}\n\t\t<div class='card-deck'>`;
                     for(var i = 0; i < employees.length; i++) {
-                        html += employeeCard(employees[i]);
+                        html += `\n\t\t` + employeeCard(employees[i]);
                     }
-                    html += `</body></html>`;
+                    html += `\n\t\t</div>\n\t</body>\n</html>`;
                     fs.writeFile('./dist/MyTeam.html', html, err => {
                         if(err) {
                             console.log(err);
