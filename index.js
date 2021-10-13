@@ -2,6 +2,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const { ManagerQ, EngineerQ, InternQ } = require('./src/questions');
+const { employeeCard, hEl } = require('./src/teamHtml');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -66,6 +67,18 @@ function getEmployees(employees) {
                 employees.push(nextEmployee);
                 if(!employeeData.addEmployee) {
                     console.log(employees);
+                    let html = "<html><head><title>My Team</title>"; //More will be added later
+
+                    html += `</head><body>${hEl("My Team",1,[])}`;
+                    for(var i = 0; i < employees.length; i++) {
+                        html += employeeCard(employees[i]);
+                    }
+                    html += `</body></html>`;
+                    fs.writeFile('./dist/MyTeam.html', html, err => {
+                        if(err) {
+                            console.log(err);
+                        }
+                    });
                 } else {
                     getEmployees(employees);
                 }
