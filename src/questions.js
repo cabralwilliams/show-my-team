@@ -4,6 +4,7 @@ class EmployeeQ {
         this.nameQ = this.getNameQ();
         this.idQ = this.getIdQ();
         this.emailQ = this.getEmailQ();
+        this.addEmployee = this.getAddEmployee();
     }
 
     getNameQ() {
@@ -26,14 +27,7 @@ class EmployeeQ {
         var nextQuestion = {
             type: "number",
             name: "id",
-            message: "Please enter the employee's employee id.",
-            validate: function(idVal) {
-                if(typeof idVal !== "number" || idVal%1 !== idVal || idVal <= 0) {
-                    console.log("Employee id must be a positive integer.");
-                    return false;
-                }
-                return true;
-            }
+            message: "Please enter the employee's employee id."
         };
         return nextQuestion;
     }
@@ -53,6 +47,16 @@ class EmployeeQ {
         };
         return nextQuestion;
     }
+
+    getAddEmployee() {
+        var nextQuestion = {
+            type: "confirm",
+            name: "addEmployee",
+            message: "Would you like to add another employee?",
+            default: false
+        };
+        return nextQuestion;
+    }
 }
 
 class ManagerQ extends EmployeeQ {
@@ -65,20 +69,13 @@ class ManagerQ extends EmployeeQ {
         var nextQuestion = {
             type: "number",
             name: "officeNumber",
-            message: "Please enter the manager's office number.",
-            validate: function(idVal) {
-                if(typeof idVal !== "number" || idVal%1 !== idVal || idVal <= 0) {
-                    console.log("The office number must be a positive integer.");
-                    return false;
-                }
-                return true;
-            }
+            message: "Please enter the manager's office number."
         };
         return nextQuestion;
     }
 
     getQuestions() {
-        return [this.nameQ,this.idQ,this.emailQ,this.officeNumberQ];
+        return [this.nameQ,this.idQ,this.emailQ,this.officeNumberQ,this.addEmployee];
     }
 }
 
@@ -105,7 +102,7 @@ class EngineerQ extends EmployeeQ {
     }
 
     getQuestions() {
-        return [this.nameQ,this.idQ,this.emailQ,this.githubQ];
+        return [this.nameQ,this.idQ,this.emailQ,this.githubQ,this.addEmployee];
     }
 }
 
@@ -132,7 +129,7 @@ class InternQ extends EmployeeQ {
     }
 
     getQuestions() {
-        return [this.nameQ,this.idQ,this.emailQ,this.schoolQ];
+        return [this.nameQ,this.idQ,this.emailQ,this.schoolQ,this.addEmployee];
     }
 }
 
