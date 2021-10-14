@@ -40,7 +40,7 @@ function getEmployees(employees) {
             type: "list",
             name: "employeeType",
             message: "Which type of employee would you like to add?",
-            choices: ["Manager","Engineer","Intern"]
+            choices: ["Engineer","Intern"]
         }
     )
     .then(employee => {
@@ -67,9 +67,10 @@ function getEmployees(employees) {
                 employees.push(nextEmployee);
                 if(!employeeData.addEmployee) {
                     console.log(employees);
+                    let headerTitle = `${employees[0].name}'s Team`;
                     let html = "<html>\n\t<head>"; //More will be added later
                     html +=`\n\t\t<meta charset="UTF-8">\n\t\t<meta http-equiv="X-UA-Compatible" content="IE=edge">\n\t\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n\t\t<title>${employees[0].getName()}'s Team</title>\n\t\t<link href="./style.css" rel="stylesheet" />`
-                    html += `\n\t</head>\n\t<body>\n\t\t${hEl("My Team",1,[])}\n\t\t<div class='card-deck'>`;
+                    html += `\n\t</head>\n\t<body>\n\t\t${hEl(headerTitle,1,[])}\n\t\t<div class='card-deck'>`;
                     for(var i = 0; i < employees.length; i++) {
                         html += `\n\t\t` + employeeCard(employees[i]);
                     }
@@ -87,4 +88,27 @@ function getEmployees(employees) {
     });
 }
 
-getEmployees();
+const knowTheTeam = () => {
+    const questionaire = employeeQuestions("Manager");
+    inquirer.prompt(
+        questionaire
+    )
+    .then(employeeData => {
+        if(isNaN(employeeData.id) || employeeData.id <= 0 || Math.floor(employeeData.id) != employeeData.id) {
+            console.log("The employee id must be a positive integer.");
+            knowTheTeam();
+        } else if(employeeData.hasOwnProperty("officeNumber") && (isNaN(employeeData.officeNumber) || employeeData.officeNumber <= 0 || Math.floor(employeeData.officeNumber) != employeeData.officeNumber)) {
+            console.log("The manager's office number must be a positive integer.");
+            knowTheTeam();
+        } else {
+            let nextEmployee = new Manager(employeeData.name,employeeData.id,employeeData.email,employeeData.officeNumber);
+            return [nextEmployee];
+        }
+    })
+    .then(employees => {
+        getEmployees(employees);
+    });
+};
+
+//getEmployees();
+knowTheTeam();

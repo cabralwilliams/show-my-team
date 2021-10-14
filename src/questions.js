@@ -62,7 +62,24 @@ class EmployeeQ {
 class ManagerQ extends EmployeeQ {
     constructor() {
         super();
+        this.nameQ = this.getNameQ();
         this.officeNumberQ = this.getOfficeNumber();
+    }
+
+    getNameQ() {
+        var nextQuestion = {
+            type: "input",
+            name: "name",
+            message: "Enter the name of the manager please.",
+            validate: function(nameVal) {
+                if(!nameVal) {
+                    console.log("Please enter a name for the manager.");
+                    return false;
+                }
+                return true;
+            }
+        };
+        return nextQuestion;
     }
 
     getOfficeNumber() {
