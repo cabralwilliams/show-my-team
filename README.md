@@ -2,7 +2,7 @@
 
   [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
 
-  ![The Chi-Blade will be forged!](../src/images/team_xehanort1.PNG)
+  ![The Chi-Blade will be forged!](./src/images/team_xehanort1.PNG)
 
   ## Description
   This project allows the user to input data to build an html view of her/his technology team.  Once completed, the user will have nicely styled view of the team and will be able to readily email or check out Github profiles of selected team members.
